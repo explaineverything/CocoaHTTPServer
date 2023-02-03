@@ -1,6 +1,6 @@
-#import "HTTPResponse.h"
+#import "EEHTTPResponse.h"
 
-@interface HTTPErrorResponse : NSObject <HTTPResponse> {
+@interface HTTPErrorResponse : NSObject <EEHTTPResponse> {
     NSInteger _status;
 }
 
