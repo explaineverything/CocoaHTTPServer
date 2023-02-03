@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol HTTPResponse
+@protocol EEHTTPResponse
 
 /**
  * Returns the length of the data in bytes.

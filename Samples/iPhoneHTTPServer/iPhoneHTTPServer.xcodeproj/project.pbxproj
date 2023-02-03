@@ -20,7 +20,7 @@
 		DC372F00139DC2E600A8407D /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EE6139DC2E600A8407D /* DDRange.m */; };
 		DC372F01139DC2E600A8407D /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EE8139DC2E600A8407D /* HTTPAuthenticationRequest.m */; };
 		DC372F02139DC2E600A8407D /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EEA139DC2E600A8407D /* HTTPConnection.m */; };
-		DC372F03139DC2E600A8407D /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EED139DC2E600A8407D /* HTTPMessage.m */; };
+		DC372F03139DC2E600A8407D /* EEHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EED139DC2E600A8407D /* EEHTTPMessage.m */; };
 		DC372F04139DC2E600A8407D /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EF0139DC2E600A8407D /* HTTPServer.m */; };
 		DC372F05139DC2E600A8407D /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EF3139DC2E600A8407D /* HTTPAsyncFileResponse.m */; };
 		DC372F06139DC2E600A8407D /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DC372EF5139DC2E600A8407D /* HTTPDataResponse.m */; };
@@ -56,6 +56,7 @@
 		28D7ACF70DDB3853001CB0EB /* iPhoneHTTPServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPhoneHTTPServerViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iPhoneHTTPServer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneHTTPServer_Prefix.pch; sourceTree = "<group>"; };
+		45184633298D30E700B6D818 /* EEHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EEHTTPResponse.h; path = ../../Core/EEHTTPResponse.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iPhoneHTTPServer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iPhoneHTTPServer-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DC372E48139D398400A8407D /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		DC372E49139D398400A8407D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -71,9 +72,8 @@
 		DC372EE9139DC2E600A8407D /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPConnection.h; path = ../../Core/HTTPConnection.h; sourceTree = "<group>"; };
 		DC372EEA139DC2E600A8407D /* HTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPConnection.m; path = ../../Core/HTTPConnection.m; sourceTree = "<group>"; };
 		DC372EEB139DC2E600A8407D /* HTTPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPLogging.h; path = ../../Core/HTTPLogging.h; sourceTree = "<group>"; };
-		DC372EEC139DC2E600A8407D /* HTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPMessage.h; path = ../../Core/HTTPMessage.h; sourceTree = "<group>"; };
-		DC372EED139DC2E600A8407D /* HTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPMessage.m; path = ../../Core/HTTPMessage.m; sourceTree = "<group>"; };
-		DC372EEE139DC2E600A8407D /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPResponse.h; path = ../../Core/HTTPResponse.h; sourceTree = "<group>"; };
+		DC372EEC139DC2E600A8407D /* EEHTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EEHTTPMessage.h; path = ../../Core/EEHTTPMessage.h; sourceTree = "<group>"; };
+		DC372EED139DC2E600A8407D /* EEHTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EEHTTPMessage.m; path = ../../Core/EEHTTPMessage.m; sourceTree = "<group>"; };
 		DC372EEF139DC2E600A8407D /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPServer.h; path = ../../Core/HTTPServer.h; sourceTree = "<group>"; };
 		DC372EF0139DC2E600A8407D /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPServer.m; path = ../../Core/HTTPServer.m; sourceTree = "<group>"; };
 		DC372EF2139DC2E600A8407D /* HTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAsyncFileResponse.h; sourceTree = "<group>"; };
@@ -250,6 +250,7 @@
 		DC5406E7129F5CD100195140 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
+				45184633298D30E700B6D818 /* EEHTTPResponse.h */,
 				DC372EEB139DC2E600A8407D /* HTTPLogging.h */,
 				DC372EE7139DC2E600A8407D /* HTTPAuthenticationRequest.h */,
 				DC372EE8139DC2E600A8407D /* HTTPAuthenticationRequest.m */,
@@ -257,9 +258,8 @@
 				DC372EF0139DC2E600A8407D /* HTTPServer.m */,
 				DC372EE9139DC2E600A8407D /* HTTPConnection.h */,
 				DC372EEA139DC2E600A8407D /* HTTPConnection.m */,
-				DC372EEC139DC2E600A8407D /* HTTPMessage.h */,
-				DC372EED139DC2E600A8407D /* HTTPMessage.m */,
-				DC372EEE139DC2E600A8407D /* HTTPResponse.h */,
+				DC372EEC139DC2E600A8407D /* EEHTTPMessage.h */,
+				DC372EED139DC2E600A8407D /* EEHTTPMessage.m */,
 				DC372EFC139DC2E600A8407D /* WebSocket.h */,
 				DC372EFD139DC2E600A8407D /* WebSocket.m */,
 				DC372EF1139DC2E600A8407D /* Responses */,
@@ -375,7 +375,7 @@
 				DC372F00139DC2E600A8407D /* DDRange.m in Sources */,
 				DC372F01139DC2E600A8407D /* HTTPAuthenticationRequest.m in Sources */,
 				DC372F02139DC2E600A8407D /* HTTPConnection.m in Sources */,
-				DC372F03139DC2E600A8407D /* HTTPMessage.m in Sources */,
+				DC372F03139DC2E600A8407D /* EEHTTPMessage.m in Sources */,
 				DC372F04139DC2E600A8407D /* HTTPServer.m in Sources */,
 				DC372F05139DC2E600A8407D /* HTTPAsyncFileResponse.m in Sources */,
 				DC372F06139DC2E600A8407D /* HTTPDataResponse.m in Sources */,
