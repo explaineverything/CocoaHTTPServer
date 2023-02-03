@@ -1,6 +1,6 @@
-#import "HTTPResponse.h"
+#import "EEHTTPResponse.h"
 
-@interface PUTResponse : NSObject <HTTPResponse> {
+@interface PUTResponse : NSObject <EEHTTPResponse> {
   NSInteger _status;
 }
 - (id) initWithFilePath:(NSString*)path headers:(NSDictionary*)headers bodyData:(NSData*)body;

@@ -1,5 +1,5 @@
 #import "DAVConnection.h"
-#import "HTTPMessage.h"
+#import "EEHTTPMessage.h"
 #import "HTTPFileResponse.h"
 #import "HTTPAsyncFileResponse.h"
 #import "PUTResponse.h"
@@ -97,7 +97,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
   [super finishResponse];
 }
 
-- (NSObject<HTTPResponse>*) httpResponseForMethod:(NSString*)method URI:(NSString*)path {
+- (NSObject<EEHTTPResponse>*) httpResponseForMethod:(NSString*)method URI:(NSString*)path {
   if ([method isEqualToString:@"HEAD"] || [method isEqualToString:@"GET"]) {
     NSString* filePath = [self filePathForURI:path allowDirectory:NO];
     if (filePath) {

@@ -1,6 +1,6 @@
-#import "HTTPResponse.h"
+#import "EEHTTPResponse.h"
 
-@interface DELETEResponse : NSObject <HTTPResponse> {
+@interface DELETEResponse : NSObject <EEHTTPResponse> {
   NSInteger _status;
 }
 - (id) initWithFilePath:(NSString*)path;

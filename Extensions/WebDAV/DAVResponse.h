@@ -1,6 +1,6 @@
-#import "HTTPResponse.h"
+#import "EEHTTPResponse.h"
 
-@interface DAVResponse : NSObject <HTTPResponse> {
+@interface DAVResponse : NSObject <EEHTTPResponse> {
 @private
   UInt64 _offset;
   NSMutableDictionary* _headers;
