@@ -1,5 +1,5 @@
 #import "WebSocket.h"
-#import "HTTPMessage.h"
+#import "EEHTTPMessage.h"
 #import "GCDAsyncSocket.h"
 #import "DDNumber.h"
 #import "DDData.h"
@@ -71,7 +71,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	NSData *maskingKey;
 }
 
-+ (BOOL)isWebSocketRequest:(HTTPMessage *)request
++ (BOOL)isWebSocketRequest:(EEHTTPMessage *)request
 {
 	// Request (Draft 75):
 	// 
@@ -120,7 +120,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	return isWebSocket;
 }
 
-+ (BOOL)isVersion76Request:(HTTPMessage *)request
++ (BOOL)isVersion76Request:(EEHTTPMessage *)request
 {
 	NSString *key1 = [request headerField:@"Sec-WebSocket-Key1"];
 	NSString *key2 = [request headerField:@"Sec-WebSocket-Key2"];
@@ -139,7 +139,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	return isVersion76;
 }
 
-+ (BOOL)isRFC6455Request:(HTTPMessage *)request
++ (BOOL)isRFC6455Request:(EEHTTPMessage *)request
 {
 	NSString *key = [request headerField:@"Sec-WebSocket-Key"];
 	BOOL isRFC6455 = (key != nil);
@@ -155,7 +155,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 
 @synthesize websocketQueue;
 
-- (id)initWithRequest:(HTTPMessage *)aRequest socket:(GCDAsyncSocket *)socket
+- (id)initWithRequest:(EEHTTPMessage *)aRequest socket:(GCDAsyncSocket *)socket
 {
 	HTTPLogTrace();
 	
@@ -376,7 +376,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	// 8jKS'y:G*Co,Wxa-
 
 	
-	HTTPMessage *wsResponse = [[HTTPMessage alloc] initResponseWithStatusCode:101
+    EEHTTPMessage *wsResponse = [[EEHTTPMessage alloc] initResponseWithStatusCode:101
 	                                                              description:@"Web Socket Protocol Handshake"
 	                                                                  version:HTTPVersion1_1];
 	

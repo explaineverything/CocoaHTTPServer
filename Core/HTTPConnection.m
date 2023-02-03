@@ -1,7 +1,7 @@
 #import "GCDAsyncSocket.h"
 #import "HTTPServer.h"
 #import "HTTPConnection.h"
-#import "HTTPMessage.h"
+#import "EEHTTPMessage.h"
 #import "EEHTTPResponse.h"
 #import "HTTPAuthenticationRequest.h"
 #import "DDNumber.h"
@@ -204,7 +204,7 @@ static NSMutableArray *recentNonces;
 		lastNC = 0;
 		
 		// Create a new HTTP message
-		request = [[HTTPMessage alloc] initEmptyRequest];
+		request = [[EEHTTPMessage alloc] initEmptyRequest];
 		
 		numHeaderLines = 0;
 		
@@ -533,7 +533,7 @@ static NSMutableArray *recentNonces;
 /**
  * Adds a digest access authentication challenge to the given response.
 **/
-- (void)addDigestAuthChallenge:(HTTPMessage *)response
+- (void)addDigestAuthChallenge:(EEHTTPMessage *)response
 {
 	HTTPLogTrace();
 	
@@ -546,7 +546,7 @@ static NSMutableArray *recentNonces;
 /**
  * Adds a basic authentication challenge to the given response.
 **/
-- (void)addBasicAuthChallenge:(HTTPMessage *)response
+- (void)addBasicAuthChallenge:(EEHTTPMessage *)response
 {
 	HTTPLogTrace();
 	
@@ -1005,12 +1005,12 @@ static NSMutableArray *recentNonces;
  * 
  * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
 **/
-- (HTTPMessage *)newUniRangeResponse:(UInt64)contentLength
+- (EEHTTPMessage *)newUniRangeResponse:(UInt64)contentLength
 {
 	HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
 	
 	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
 	
@@ -1029,12 +1029,12 @@ static NSMutableArray *recentNonces;
  * 
  * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
 **/
-- (HTTPMessage *)newMultiRangeResponse:(UInt64)contentLength
+- (EEHTTPMessage *)newMultiRangeResponse:(UInt64)contentLength
 {
 	HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
 	
 	// We have to send each range using multipart/byteranges
 	// So each byterange has to be prefix'd and suffix'd with the boundry
@@ -1164,7 +1164,7 @@ static NSMutableArray *recentNonces;
 		}
 	}
 	
-	HTTPMessage *response;
+    EEHTTPMessage *response;
 	
 	if (!isRangeRequest)
 	{
@@ -1176,7 +1176,7 @@ static NSMutableArray *recentNonces;
 		{
 			status = [httpResponse status];
 		}
-		response = [[HTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];
+		response = [[EEHTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];
 		
 		if (isChunked)
 		{
@@ -1757,7 +1757,7 @@ static NSMutableArray *recentNonces;
 	
 	HTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 	
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
     
 	NSData *responseData = [self preprocessErrorResponse:response];
@@ -1777,7 +1777,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogInfo(@"HTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
 		
 	// Status Code 401 - Unauthorized
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
 	
 	if ([self useDigestAccessAuthentication])
@@ -1808,7 +1808,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogWarn(@"HTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 	
 	// Status Code 400 - Bad Request
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
 	[response setHeaderField:@"Connection" value:@"close"];
 	
@@ -1836,7 +1836,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogWarn(@"HTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 	
 	// Status code 405 - Method Not Allowed
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
 	[response setHeaderField:@"Connection" value:@"close"];
 	
@@ -1861,7 +1861,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogInfo(@"HTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
 	
 	// Status Code 404 - Not Found
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
+    EEHTTPMessage *response = [[EEHTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
 	
 	NSData *responseData = [self preprocessErrorResponse:response];
@@ -1915,7 +1915,7 @@ static NSMutableArray *recentNonces;
  * This method is called immediately prior to sending the response headers.
  * This method adds standard header fields, and then converts the response to an NSData object.
 **/
-- (NSData *)preprocessResponse:(HTTPMessage *)response
+- (NSData *)preprocessResponse:(EEHTTPMessage *)response
 {
 	HTTPLogTrace();
 	
@@ -1952,7 +1952,7 @@ static NSMutableArray *recentNonces;
  * This method is called immediately prior to sending the response headers (for an error).
  * This method adds standard header fields, and then converts the response to an NSData object.
 **/
-- (NSData *)preprocessErrorResponse:(HTTPMessage *)response
+- (NSData *)preprocessErrorResponse:(EEHTTPMessage *)response
 {
 	HTTPLogTrace();
 	
@@ -2458,7 +2458,7 @@ static NSMutableArray *recentNonces;
 				// finishBody method and forgot to call [super finishBody].
 				NSAssert(request == nil, @"Request not properly released in finishBody");
 				
-				request = [[HTTPMessage alloc] initEmptyRequest];
+				request = [[EEHTTPMessage alloc] initEmptyRequest];
 				
 				numHeaderLines = 0;
 				sentResponseHeaders = NO;

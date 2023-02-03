@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 @class GCDAsyncSocket;
-@class HTTPMessage;
+@class EEHTTPMessage;
 @class HTTPServer;
 @class WebSocket;
 @protocol EEHTTPResponse;
@@ -41,7 +41,7 @@
 	
 	BOOL started;
 	
-	HTTPMessage *request;
+    EEHTTPMessage *request;
 	unsigned int numHeaderLines;
 	
 	BOOL sentResponseHeaders;
@@ -103,8 +103,8 @@
 - (void)handleInvalidRequest:(NSData *)data;
 - (void)handleUnknownMethod:(NSString *)method;
 
-- (NSData *)preprocessResponse:(HTTPMessage *)response;
-- (NSData *)preprocessErrorResponse:(HTTPMessage *)response;
+- (NSData *)preprocessResponse:(EEHTTPMessage *)response;
+- (NSData *)preprocessErrorResponse:(EEHTTPMessage *)response;
 
 - (void)finishResponse;
 
